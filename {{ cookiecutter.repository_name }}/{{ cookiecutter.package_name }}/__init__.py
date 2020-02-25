@@ -3,7 +3,7 @@ import os
 from pathlib import Path
 
 
-with res.open_text('{{ cookiecutter.module_name }}', 'VERSION') as version_file:
+with res.open_text('{{ cookiecutter.package_name }}', 'VERSION') as version_file:
     __version__ = version_file.read().strip()
 
 
