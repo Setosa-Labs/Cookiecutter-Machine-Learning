@@ -29,7 +29,7 @@ def home_dir(*sub_dirs):
     -------
     path : path with subdirectories appended
     '''
-    if '{{ cookiecutter.module_name.upper() }}_HOME' in os.environ:
+    if '{{ cookiecutter._envvar_prefix }}_HOME' in os.environ:
         path = Path(os.getenv('{{ cookiecutter._envvar_prefix }}_HOME'))
     else:
         path = Path.home() / '.{{ cookiecutter.package_name }}'
