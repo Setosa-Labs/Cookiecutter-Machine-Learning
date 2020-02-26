@@ -1,5 +1,5 @@
 {
-    "project_name": "My Project",
+    "project_name": "Name of your project",
     "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "description": "A short description of the project",
     "author_name": "Your name(s) or your organization's name",
