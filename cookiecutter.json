@@ -1,8 +1,9 @@
 {
-    "project_name": "Project Name",
+    "project_name": "My Project",
     "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
-    "repository_name": "{{ cookiecutter.project_name.lower().replace(' ', '-') }}",
-    "owner": "Your name(s) or your organization's name",
     "description": "A short description of the project",
-    "license": ["MIT", "BSD-3-Clause", "ISC", "None"]
+    "author_name": "Your name(s) or your organization's name",
+    "license": ["MIT", "BSD-3-Clause", "ISC", "None"],
+    "_repository_name": "{{ cookiecutter.project_name.replace(' ', '-') }}",
+    "_envvar_prefix": "{{ cookiecutter.project_name.upper().replace(' ', '_') }}"
 }
