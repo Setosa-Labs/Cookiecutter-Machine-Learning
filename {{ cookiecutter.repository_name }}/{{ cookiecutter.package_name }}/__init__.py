@@ -1,3 +1,5 @@
+'''{{ cookeicutter.description }}'''
+
 import importlib.resources as res
 import os
 from pathlib import Path
