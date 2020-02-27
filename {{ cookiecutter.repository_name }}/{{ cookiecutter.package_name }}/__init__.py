@@ -12,7 +12,7 @@ def home_dir(*sub_dirs):
 
     The environment is checked for the following environment variable:
 
-        `{{ cookiecutter._envvar_prefix }}_HOME`
+        `{{ cookiecutter.project_name.upper().replace(' ', '_') }}_HOME`
 
     If the variable exists, it is used as the path prefix and each argument of
     `sub_dirs` is appended to the path. If the variable is not defined, the
@@ -29,8 +29,8 @@ def home_dir(*sub_dirs):
     -------
     path : path with subdirectories appended
     '''
-    if '{{ cookiecutter._envvar_prefix }}_HOME' in os.environ:
-        path = Path(os.getenv('{{ cookiecutter._envvar_prefix }}_HOME'))
+    if '{{ cookiecutter.project_name.upper().replace(' ', '_') }}_HOME' in os.environ:
+        path = Path(os.getenv('{{ cookiecutter.project_name.upper().replace(' ', '_') }}_HOME'))
     else:
         path = Path.home() / '.{{ cookiecutter.package_name }}'
 
