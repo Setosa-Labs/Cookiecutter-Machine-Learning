@@ -4,6 +4,5 @@
     "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "description": "A short description of the project",
     "author_name": "Your name(s) or your organization name",
-    "license": ["MIT", "BSD-3-Clause", "ISC", "None"],
-    "_envvar_prefix": "{{ cookiecutter.project_name.upper().replace(' ', '_') }}"
+    "license": ["MIT", "BSD-3-Clause", "ISC", "None"]
 }
