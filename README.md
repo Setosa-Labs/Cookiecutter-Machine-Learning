@@ -1,1 +1,3 @@
-# Cookiecutter Setosa Data
+# Cookiecutter Machine Learning
+
+Production machine learning in Python!
