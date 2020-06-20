@@ -8,8 +8,11 @@ from pathlib import Path
 
 
 def download_dataset(output_dir=None):
-    '''Retrieves data from source and outputs files into the specified
-    directory. If `output_dir` is not specified, the directory defaults to:
+    '''Download raw datasets.
+    
+    Retrieve data from source and output files into the directory specified 
+    by `output_dir`. If `output_dir` is not specified, the directory defaults
+    to:
 
         `{{ cookiecutter.package_name.upper() }}_HOME/datasets/raw/`
 
@@ -22,38 +25,38 @@ def download_dataset(output_dir=None):
     -------
     None
     '''
-    if output_dir:
-        output_dir = Path(output_dir)
-    else:
+    if not output_dir:
         output_dir = home_dir('datasets', 'raw')
+
+    if not output_dir.exists():
+        output_dir.mkdir(parents=True)
 
     logger = logging.getLogger(__name__)
     logger.info('downloading raw dataset')
     
-    pass  # download logic goes here
+    # TODO: dataset download code
+    pass
 
 
 @click.command()
 @click.option('--output_directory', required=False, type=click.Path(),
-              help='Relative path to output directory.')
-def script_main(output_directory):
-    '''Retrieves data from source and outputs files into the specified 
-    directory relative to the current working directory. If `output_dir` is not
-    specified, the folder defaults to:
+              help='Path to output directory.')
+def cli_main(output_directory):
+    '''Retrieve data from source and output files into the directory specified 
+    by `output_directory`. If `output_directory` is not specified, the
+    directory defaults to:
 
         `{{ cookiecutter.package_name.upper() }}_HOME/datasets/raw/`
     '''
-    if output_directory:
-        download_dataset(Path.cwd().joinpath(output_directory))
-    else:
-        download_dataset(None)
+    logging.basicConfig(level=logging.INFO, format=LOG_FMT)
+
+    download_dataset(Path(output_directory))
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, format=LOG_FMT)
-
     # Load environment variables by walking up the directory tree until .env
     # is found and then loading the .env file
     load_dotenv(find_dotenv())
 
-    script_main()
+    # Call the command-line interface
+    cli_main()

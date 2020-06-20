@@ -7,16 +7,18 @@ from dotenv import find_dotenv, load_dotenv
 from pathlib import Path
 
 
-def create_features(input_dir=None, output_dir=None):
-    '''Transforms raw data in the `input_dir` directory and outputs features 
-    for training into the `output_dir` directory. If `output_dir` is not
-    specified, the directory defaults to:
-
-        `{{ cookiecutter.package_name.upper() }}_HOME/datasets/raw/`
-
-    If the `input_dir` directory is not specified, it defaults to:
+def construct_features(input_dir=None, output_dir=None):
+    '''Construct features for model training.
+    
+    Transform raw data in the `input_dir` directory into features for model 
+    input in the `output_dir` directory. If `input_dir` is not specified, the 
+    input directory defaults to:
 
         `{{ cookiecutter.package_name.upper() }}_HOME/datasets/processed/`
+    
+    If `output_dir` is not specified, the output directory defaults to:
+
+        `{{ cookiecutter.package_name.upper() }}_HOME/datasets/raw/`
 
     Parameters
     ----------
@@ -29,57 +31,47 @@ def create_features(input_dir=None, output_dir=None):
     -------
     None
     '''
-    if input_dir:
-        input_dir = Path(input_dir)
-    else:
+    if not input_dir:
         input_dir = home_dir('datasets', 'raw')
 
-    if output_dir:
-        output_dir = Path(output_dir)
-    else:
+    if not output_dir:
         output_dir = home_dir('datasets', 'processed')
+
+    if not output_dir.exists():
+        output_dir.mkdir(parents=True)
 
     logger = logging.getLogger(__name__)
     logger.info('creating features')
 
-    pass  # Feature engineering logic goes here
+    # TODO: Feature engineering code
+    pass
 
 
 @click.command()
 @click.option('--input_directory', required=False, type=click.Path(),
-              help='Relative path to input directory.')
+              help='Path to input directory.')
 @click.option('--output_directory', required=False, type=click.Path(),
-              help='Relative path to output directory.')
-def script_main(input_directory, output_directory):
-    '''Transforms raw data in the `input_dir` directory relative to the current
-    working directory and outputs features for training into the `output_dir` 
-    directory relative to the current working directory. If `output_dir` is not
-    specified, the directory defaults to:
+              help='Path to output directory.')
+def cli_main(input_directory, output_directory):
+    '''Transform raw data in the `input_directory` into features for model
+    input in the `output_directory`. If `input_directory` directory is not 
+    specified, the input directory defaults to:
 
         `{{ cookiecutter.package_name.upper() }}_HOME/datasets/raw/`
-
-    If the `input_dir` directory is not specified, it defaults to:
+    
+    If `output_directory` is not specified, the output directory defaults to:
 
         `{{ cookiecutter.package_name.upper() }}_HOME/datasets/processed/`
     '''
-    if output_directory:
-        output_dir = Path.cwd().joinpath(output_directory)
-    else:
-        output_dir = None
+    logging.basicConfig(level=logging.INFO, format=LOG_FMT)
 
-    if input_directory:
-        input_dir = Path.cwd().joinpath(input_directory)
-    else:
-        input_dir = None
-
-    create_features(input_dir, output_dir)
+    construct_features(Path(input_directory), Path(output_directory))
 
 
 if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, format=LOG_FMT)
-
     # Load environment variables by walking up the directory tree until .env
     # is found and then loading the .env file
     load_dotenv(find_dotenv())
 
-    script_main()
+    # Call the command-line interface
+    cli_main()
