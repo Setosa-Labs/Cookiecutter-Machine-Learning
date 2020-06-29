@@ -1,0 +1,8 @@
+name: {{ cookiecutter.package_name }}
+channels:
+  - defaults
+dependencies:
+  - click
+  - flake8
+  - pip>=7.0
+  - python>=3.7

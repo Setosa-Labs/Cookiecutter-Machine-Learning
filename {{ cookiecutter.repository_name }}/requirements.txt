@@ -1,2 +1,6 @@
-Click>=0.7
-Flask>=1.1
+# install package locally
+--editable .
+
+# external requirements
+click
+flake8

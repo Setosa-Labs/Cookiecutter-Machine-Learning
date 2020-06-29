@@ -1,4 +1,4 @@
-'''{{ cookeicutter.description }}'''
+'''{{ cookiecutter.description }}'''
 
 import importlib.resources as res
 import os

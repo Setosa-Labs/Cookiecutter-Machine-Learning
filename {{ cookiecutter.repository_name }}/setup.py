@@ -1,11 +1,12 @@
 from setuptools import find_packages, setup
+from pathlib import Path
 
-with open('{{ cookiecutter.package_name }}/VERSION', 'r') as version_file:
-    VERSION = version_file.read().strip()
+with open(Path('{{ cookiecutter.package_name }}') / 'VERSION', 'r') as file:
+    __version__ = file.read().strip()
 
 setup(
     name='{{ cookiecutter.package_name }}',
-    version=VERSION,
+    version=__version__,
     description='{{ cookiecutter.project_name }}',
     author='{{ cookiecutter.author_name }}',
     packages=find_packages('{{ cookiecutter.package_name }}'),

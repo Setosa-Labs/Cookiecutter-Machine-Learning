@@ -4,5 +4,7 @@
     "package_name": "{{ cookiecutter.project_name.lower().replace(' ', '_') }}",
     "description": "A short description of the project",
     "author_name": "Your name(s) or your organization name",
+    "package_manager": ["conda", "pip"],
+    "include_cli": "y",
     "license": ["MIT", "BSD-3-Clause", "ISC", "None"]
 }
